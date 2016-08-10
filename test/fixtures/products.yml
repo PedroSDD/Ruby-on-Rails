@@ -13,3 +13,9 @@ two:
   text: MyString
   image_url: MyString
   ptice: 9.99
+
+ruby:      #Row name
+  title:  Programming Ruby 1.9
+  description:  Ruby is the fastest growing and most exciting dynamic language out there. If you nedd to get working programs delivered fast, you should add Ruby to your toolbox.
+  ptice:  49.50
+  image_url:  ruby.png
