@@ -1,4 +1,8 @@
 class Product < ActiveRecord::Base
+
+  has_many :line_items
+  before_destroy :ensure_not_referenced_by_any_line_item
+
   validates :title, :description, :image_url, presence: true   #validates is a method of rails that allows validate something
   validates :ptice, numericality: {greater_than_or_equal_to: 0.01}
   validates :title, uniqueness: true #This gives the guarentee that our title is a unique on the table
@@ -9,5 +13,17 @@ class Product < ActiveRecord::Base
 
   def self.latest
     Product.order(:updated_at).last
+  end
+
+  private
+
+  #ensure that there are no line items referencing this product. Notice also that this is an hook method that Rails calls automatically
+  def ensure_not_referenced_by_any_line_item        #in this case before destroy a row in the database
+    if line_items.empty?
+      return true
+    else
+      errors.add(:base, 'Line Itens present')
+      return false
+    end
   end
 end
