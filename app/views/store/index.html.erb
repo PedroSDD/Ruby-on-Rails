@@ -13,8 +13,13 @@
         <%= sanitize(product.description) %>
         <div class="price_line">
           <span class="price"><%= number_to_currency(product.ptice) %></span>
-          </div>
+          <%= button_to 'Add to Cart', line_items_path(product_id: product) %>
         </div>
+      </div>
     <% end %>
   <% end %>
 <% end %>
+
+<%-# Notice we are using button_to instead of link_to method because we want to use a POST, and the link_to method -%>
+<%-# by default uses a HTTP GET -%>
+<%-# Also notice that we are passing the product instance and Rails will take the product_id -%>
